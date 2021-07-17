@@ -56,45 +56,45 @@ class RammusPlugin(private val registrar: Registrar, private val methodChannel: 
             pushService.setPushIntentService(RammusPushIntentService::class.java)
             val appInfo = application.packageManager
                     .getApplicationInfo(application.packageName, PackageManager.GET_META_DATA)
-            val xiaomiAppId = appInfo.metaData.getString("com.xiaomi.push.client.app_id")
-            val xiaomiAppKey = appInfo.metaData.getString("com.xiaomi.push.client.app_key")
-            if ((xiaomiAppId != null && xiaomiAppId.isNotBlank())
-                    && (xiaomiAppKey != null && xiaomiAppKey.isNotBlank())){
+            val xiaomiAppId = appInfo.metaData.get("com.xiaomi.push.client.app_id")
+            val xiaomiAppKey = appInfo.metaData.get("com.xiaomi.push.client.app_key")
+            if ((xiaomiAppId != null && xiaomiAppId.toString().isNotBlank())
+                    && (xiaomiAppKey != null && xiaomiAppKey.toString().isNotBlank())){
                 Log.d(TAG, "正在注册小米推送服务...")
-                MiPushRegister.register(application.applicationContext, xiaomiAppId, xiaomiAppKey)
+                MiPushRegister.register(application.applicationContext, xiaomiAppId.toString(), xiaomiAppKey.toString())
             }
             val huaweiAppId = appInfo.metaData.getString("com.huawei.hms.client.appid")
             if (huaweiAppId != null && huaweiAppId.toString().isNotBlank()){
                 Log.d(TAG, "正在注册华为推送服务...")
                 HuaWeiRegister.register(application)
             }
-            val oppoAppKey = appInfo.metaData.getString("com.oppo.push.client.app_key")
-            val oppoAppSecret = appInfo.metaData.getString("com.oppo.push.client.app_secret")
-            if ((oppoAppKey != null && oppoAppKey.isNotBlank())
-                    && (oppoAppSecret != null && oppoAppSecret.isNotBlank())){
+            val oppoAppKey = appInfo.metaData.get("com.oppo.push.client.app_key")
+            val oppoAppSecret = appInfo.metaData.get("com.oppo.push.client.app_secret")
+            if ((oppoAppKey != null && oppoAppKey.toString().isNotBlank())
+                    && (oppoAppSecret != null && oppoAppSecret.toString().isNotBlank())){
                 Log.d(TAG, "正在注册Oppo推送服务...")
-                OppoRegister.register(application.applicationContext, oppoAppKey, oppoAppSecret)
+                OppoRegister.register(application.applicationContext, oppoAppKey.toString(), oppoAppSecret.toString())
             }
-            val meizuAppId = appInfo.metaData.getString("com.meizu.push.client.app_id")
-            val meizuAppKey = appInfo.metaData.getString("com.meizu.push.client.app_key")
-            if ((meizuAppId != null && meizuAppId.isNotBlank())
-                    && (meizuAppKey != null && meizuAppKey.isNotBlank())){
+            val meizuAppId = appInfo.metaData.get("com.meizu.push.client.app_id")
+            val meizuAppKey = appInfo.metaData.get("com.meizu.push.client.app_key")
+            if ((meizuAppId != null && meizuAppId.toString().isNotBlank())
+                    && (meizuAppKey != null && meizuAppKey.toString().isNotBlank())){
                 Log.d(TAG, "正在注册魅族推送服务...")
-                MeizuRegister.register(application.applicationContext, meizuAppId, meizuAppKey)
+                MeizuRegister.register(application.applicationContext, meizuAppId.toString(), meizuAppKey.toString())
             }
-            val vivoAppId = appInfo.metaData.getString("com.vivo.push.app_id")
-            val vivoApiKey = appInfo.metaData.getString("com.vivo.push.api_key")
-            if ((vivoAppId != null && vivoAppId.isNotBlank())
-                    && (vivoApiKey != null && vivoApiKey.isNotBlank())){
+            val vivoAppId = appInfo.metaData.get("com.vivo.push.app_id")
+            val vivoApiKey = appInfo.metaData.get("com.vivo.push.api_key")
+            if ((vivoAppId != null && vivoAppId.toString().isNotBlank())
+                    && (vivoApiKey != null && vivoApiKey.toString().isNotBlank())){
                 Log.d(TAG, "正在注册Vivo推送服务...")
                 VivoRegister.register(application.applicationContext)
             }
-            val gcmSendId = appInfo.metaData.getString("com.gcm.push.send_id")
-            val gcmApplicationId = appInfo.metaData.getString("com.gcm.push.app_id")
-            if ((gcmSendId != null && gcmSendId.isNotBlank())
-                    && (gcmApplicationId != null && gcmApplicationId.isNotBlank())){
+            val gcmSendId = appInfo.metaData.get("com.gcm.push.send_id")
+            val gcmApplicationId = appInfo.metaData.get("com.gcm.push.app_id")
+            if ((gcmSendId != null && gcmSendId.toString().isNotBlank())
+                    && (gcmApplicationId != null && gcmApplicationId.toString().isNotBlank())){
                 Log.d(TAG, "正在注册Gcm推送服务...")
-                GcmRegister.register(application.applicationContext, gcmSendId, gcmApplicationId)
+                GcmRegister.register(application.applicationContext, gcmSendId.toString(), gcmApplicationId.toString())
             }
         }
     }
