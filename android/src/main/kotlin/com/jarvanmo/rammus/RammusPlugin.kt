@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Handler
 import android.util.Log
 import com.alibaba.sdk.android.push.CommonCallback
+import com.alibaba.sdk.android.push.CloudPushService
 import com.alibaba.sdk.android.push.huawei.HuaWeiRegister
 import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory
 import com.alibaba.sdk.android.push.register.*
@@ -33,6 +34,7 @@ class RammusPlugin(private val registrar: Registrar, private val methodChannel: 
         fun initPushService(application: Application){
             PushServiceFactory.init(application.applicationContext)
             val pushService = PushServiceFactory.getCloudPushService()
+            pushService.setLogLevel(CloudPushService.LOG_DEBUG)
             pushService.register(application.applicationContext, object : CommonCallback {
                 override fun onSuccess(response: String?) {
                     inHandler.postDelayed({
